@@ -1,10 +1,9 @@
 var sequelize = require("../db/connection");
-module.exports = function(sequelize, DataTypes){
-  var transaction = sequelize.define('transaction', {
+var Sequelize = require('sequelize');
+var Transaction = sequelize.define('transaction', {
       id: {
             primaryKey: true,
-            type: DataTypes.UUID,
-            defaultValue: DataTypes.UUIDV1
+            type: Sequelize.STRING,
       },
       
  /*     uid: {
@@ -18,18 +17,18 @@ module.exports = function(sequelize, DataTypes){
       },
             */
       status: {
-            type: DataTypes.ENUM('INITIATED', 'AUTHENTICATION_REQUESTED', 'AUTHENTICATION_SUCCESS', 'COMPLETED'), 
+            type: Sequelize.ENUM('INITIATED', 'AUTHENTICATION_REQUESTED', 'AUTHENTICATION_SUCCESS', 'COMPLETED'), 
             defaultValue: 'INITIATED'
                           
       },
       
       type: {
-            type: DataTypes.ENUM('BIO', 'OTP', 'SCAN'),
+            type: Sequelize.ENUM('BIO', 'OTP', 'SCAN'),
             dafaultValue: 'BIO'                          // BIO, OTP, SCAN
       },
       
       bio_type: {
-            type: DataTypes.ENUM('FMR', 'IIR'),          //FMR, IIR
+            type: Sequelize.ENUM('FMR', 'IIR'),          //FMR, IIR
             defaultValue: 'FMR'
       }
       
@@ -55,5 +54,4 @@ module.exports = function(sequelize, DataTypes){
         
   });
   
-  return transaction;
-}
+module.exports = Transaction; 
